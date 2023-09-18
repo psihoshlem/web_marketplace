@@ -27,19 +27,6 @@ class User:
         self.personality_type = personality_type
 
 USERS = [
-    ["senks", "1234"],
-    ["imadji", "4567"],
-    ["aemlnt", "qwer"],
-    ["miro", "asdd"],
-    ["krut", "dfsf"],
-    ["groot", "asdf"],
-    ["kreeper", "asdf"],
-    ["buster", "1234"],
-    ["zhoos", "zxvc"],
-    ["popicona", "zvxc"],
-]
-
-USERS = [
     User(
         "senks", 
         "1234",
@@ -178,10 +165,6 @@ FRIENDSHIPS = [
 # CREATE USERS
 for user in USERS:
     create_user(user)
-
-# UPLOAD USERS INFO
-# for buyer in BUYERS:
-#     create_buyer(buyer)
 
 # ADD FRIENDS
 for friends in FRIENDSHIPS:
