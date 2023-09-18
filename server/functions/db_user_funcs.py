@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 
-# from functions.db_models import User, engine, Friendship
-from db_models import User, engine, Friendship, Buyer
+from functions.db_models import User, engine, Friendship
+# from db_models import User, engine, Friendship, Buyer
 
 
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
