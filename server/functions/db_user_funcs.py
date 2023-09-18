@@ -78,6 +78,21 @@ def create_buyer(data):
         db.commit()
 
 
+def get_user_info_from_db(login: str):
+    with session() as db:
+        user = db.query(User).filter(User.login == login).first()
+        buyer = user.buyer
+    info = {
+        "login": login,
+        "name": buyer.name,
+        "lastname": buyer.lastname,
+        "age": buyer.age,
+        "height": buyer.height,
+        "weight": buyer.weight,
+        "personality_type": buyer.personality_type 
+    }
+    return info
+
 if __name__=="__main__":
     with session() as db:
         records = db.query(User).filter_by(id=1).first()

@@ -15,16 +15,11 @@ def encodeJWT(login: str):
     }
 
 
-def jwt_bearer(authorization: str = Header()):
+def jwt_bearer(authorization: str ):
     print(authorization)
     try:
-        if not authorization.startswith("Bearer "):
-            raise HTTPException(status_code=401, detail="Invalid Authorization header format")
-        
-        token = authorization.split("Bearer ")[1]
-        decode_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        return decode_token.login
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token has expired")
+        decode_token = jwt.decode(authorization, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        print(decode_token["login"])
+        return decode_token["login"]
     except jwt.DecodeError:
         raise HTTPException(status_code=401, detail="Token is invalid")

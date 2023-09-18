@@ -2,7 +2,11 @@ from pydantic import BaseModel
 from fastapi import APIRouter, Depends, Body
 
 from functions.jwt_funcs import jwt_bearer, encodeJWT
-from functions.db_user_funcs import create_user, auth_user
+from functions.db_user_funcs import (
+    create_user,
+    auth_user,
+    get_user_info_from_db
+)
 
 class AuthUserSchema(BaseModel):
     login: str 
@@ -25,7 +29,9 @@ async def signup(user: AuthUserSchema):
     return encodeJWT(user.login)
 
 
-@router.get("/getuser")
-async def get_user(user = Depends(jwt_bearer)):
-    print(user)
-    return user
+@router.get("/get_user_info")
+async def get_user_info(user = Depends(jwt_bearer), login = "me"):
+    if login == "me":
+        login = user
+    info = get_user_info_from_db(login)
+    return info

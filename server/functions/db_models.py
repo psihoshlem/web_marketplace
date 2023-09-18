@@ -13,7 +13,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     login = Column(String)
     password = Column(String)
-    buyer_id = Column(Integer, nullable=True)
+    buyer_id = Column(Integer, ForeignKey("buyers.id"), nullable=True)
+    buyer = relationship("Buyer", foreign_keys=[buyer_id])
 
 
 class Shop(Base):
