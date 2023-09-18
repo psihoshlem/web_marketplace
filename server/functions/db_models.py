@@ -18,8 +18,11 @@ class Product(Base):
     __tablename__ = "products"
 
     id = Column(Integer, primary_key=True, index=True)
+    shop_id = Column(Integer, ForeignKey('shops.id'))
+    shop = relationship("Shop", foreign_keys=[shop_id])
     name = Column(String)
-    cost = Column(Float)
+    description = Column(String)
+    price = Column(Float)
 
 class User(Base):
     __tablename__ = 'users'
