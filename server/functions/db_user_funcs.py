@@ -1,7 +1,8 @@
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import update
 
-from functions.db_models import User, engine, Friendship
-# from db_models import User, engine, Friendship, Buyer
+# from functions.db_models import User, engine, Friendship
+from db_models import User, engine, Friendship, Buyer
 
 
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -59,10 +60,21 @@ def get_user_friends(login):
     return friends
 
 def create_buyer(data):
-    data["user_id"] = get_user_from_login(data["login"]).id
-    buyer = Buyer(data)
+    user_id = get_user_from_login(data["login"]).id
+    buyer = Buyer(
+        user_id = user_id,
+        name = data["name"],
+        lastname = data["lastname"],
+        age = data["age"],
+        height = data["height"],
+        weight = data["weight"],
+        personality_type = data["personality_type"]
+    )
     with session() as db:
         db.add(buyer)
+        db.commit()
+        buyer_id = db.query(Buyer).where(Buyer.user_id == user_id).first().id
+        db.execute(update(User).where(User.id == user_id).values(buyer_id = buyer_id))
         db.commit()
 
 

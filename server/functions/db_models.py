@@ -33,23 +33,14 @@ class Buyer(Base):
     __tablename__ = 'buyers'
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
-    user = relationship("User", foreign_keys=[user_id])
-
+    user_id = Column(Integer, ForeignKey('users.id'))
     name = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     age = Column(Integer)
     height = Column(Float)
     weight = Column(Float)
     personality_type = Column(String)
-    def __init__(self, data):
-        self.user_id = data["user_id"]
-        self.name = data["name"]
-        self.lastname = data["lastname"]
-        self.age = data["age"]
-        self.height = data["height"]
-        self.weight = data["weight"]
-        self.personality_type = data["personality_type"]
+    user = relationship("User", foreign_keys=[user_id])
 
 class Friendship(Base):
     __tablename__ = 'friendships'
