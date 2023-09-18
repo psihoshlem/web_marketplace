@@ -1,4 +1,8 @@
-from db_user_funcs import create_user, create_buyer
+from db_user_funcs import (
+    create_user, 
+    create_buyer,
+    add_friendship
+)
 
 USERS = [
     ["senks", "1234"],
@@ -106,8 +110,37 @@ BUYERS = [
     }
 ]
 
+FRIENDSHIPS = [
+    ["senks", "krut"],
+    ["krut", "senks"],
+    ["senks", "miro"],
+    ["miro", "senks"],
+    ["senks", "imadji"],
+    ["imadji", "senks"],
+    ["senks", "aemlnt"],
+    ["aemlnt", "senks"],
+    ["imadji", "miro"],
+    ["miro", "imadji"],
+    ["imadji", "popicona"],
+    ["popicona", "imadji"],
+    ["imadji", "kreeper"],
+    ["kreeper", "imadji"],
+    ["miro", "aemlnt"],
+    ["aemlnt", "miro"],
+    ["miro", "zhoos"],
+    ["zhoos", "miro"],
+    ["miro", "groot"],
+    ["groot", "miro"],
+]
+
+# CREATE USERS
 for user in USERS:
     create_user(user[0], user[1])
 
+# UPLOAD USERS INFO
 for buyer in BUYERS:
     create_buyer(buyer)
+
+# ADD FRIENDS
+for friends in FRIENDSHIPS:
+    add_friendship(friends[0], friends[1])

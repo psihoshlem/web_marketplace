@@ -42,7 +42,7 @@ def get_user_from_login(login: str):
         user = db.query(User).filter(User.login == login).first()
     return user
 
-def add_friend(user: str, friend: str):
+def add_friendship(user: str, friend: str):
     user_id = get_user_from_login(user).id
     friend_id = get_user_from_login(friend).id
     new_friendship = Friendship(user_id=user_id, friend_id=friend_id)
@@ -54,9 +54,14 @@ def get_user_friends(login):
     user_id = get_user_from_login(login).id
     friends = []
     with session() as db:
-        records = db.query(Friendship).filter_by(user_id=user_id).all()
-        for record in records:
-            friends.append(record.friend.login)
+        friendships = db.query(Friendship).filter_by(user_id=user_id).all()
+        for friendship in friendships:
+            friend = friendship.friend
+            friend_data = {
+                "fullname": friend.buyer.name + " " + friend.buyer.lastname,
+                "login": friend.login
+            }
+            friends.append(friend_data)
     return friends
 
 def create_buyer(data):

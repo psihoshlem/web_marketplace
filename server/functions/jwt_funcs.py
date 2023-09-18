@@ -15,11 +15,9 @@ def encodeJWT(login: str):
     }
 
 
-def jwt_bearer(authorization: str ):
-    print(authorization)
+def jwt_bearer(token: str = Header()):
     try:
-        decode_token = jwt.decode(authorization, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        print(decode_token["login"])
+        decode_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         return decode_token["login"]
     except jwt.DecodeError:
         raise HTTPException(status_code=401, detail="Token is invalid")
