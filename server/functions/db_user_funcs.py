@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import update
 
-from functions.db_models import User, engine, Friendship
+from functions.db_models import User, engine, Friendship, Buyer
 # from db_models import User, engine, Friendship, Buyer
 
 
