@@ -1,19 +1,12 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import update
 
-from functions.db_models import User, engine, Friendship, Buyer
-# from db_models import User, engine, Friendship, Buyer
+from functions.db_models import User, engine, Friendship
+# from db_models import User, engine, Friendship
 
 
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-def create_user(login: str, password: str):
-    if is_user_exist(login):
-        return False
-    with session() as db:
-        db.add(User(login=login, password=password))
-        db.commit()
-    return True
 
 def is_user_exist(login):
     with session() as db:
@@ -58,49 +51,45 @@ def get_user_friends(login):
         for friendship in friendships:
             friend = friendship.friend
             friend_data = {
-                "fullname": friend.buyer.name + " " + friend.buyer.lastname,
+                "fullname": friend.name + " " + friend.lastname,
                 "login": friend.login
             }
             friends.append(friend_data)
     return friends
 
-def create_buyer(data):
-    user_id = get_user_from_login(data["login"]).id
-    buyer = Buyer(
-        user_id = user_id,
-        name = data["name"],
-        lastname = data["lastname"],
-        age = data["age"],
-        height = data["height"],
-        weight = data["weight"],
-        personality_type = data["personality_type"]
+def create_user(data):
+    if is_user_exist(data.login):
+        return False
+    buyer = User(
+        login = data.login,
+        password = data.password,
+        address = data.address,
+        name = data.name,
+        lastname = data.lastname,
+        age = data.age,
+        height = data.height,
+        weight = data.weight,
+        personality_type = data.personality_type
     )
     with session() as db:
         db.add(buyer)
         db.commit()
-        buyer_id = db.query(Buyer).where(Buyer.user_id == user_id).first().id
-        db.execute(update(User).where(User.id == user_id).values(buyer_id = buyer_id))
-        db.commit()
+    return True
 
 
 def get_user_info_from_db(login: str):
     with session() as db:
         user = db.query(User).filter(User.login == login).first()
-        buyer = user.buyer
     info = {
         "login": login,
-        "name": buyer.name,
-        "lastname": buyer.lastname,
-        "age": buyer.age,
-        "height": buyer.height,
-        "weight": buyer.weight,
-        "personality_type": buyer.personality_type 
+        "name": user.name,
+        "lastname": user.lastname,
+        "age": user.age,
+        "height": user.height,
+        "weight": user.weight,
+        "personality_type": user.personality_type 
     }
     return info
 
 if __name__=="__main__":
-    with session() as db:
-        records = db.query(User).filter_by(id=1).first()
-        print(records.buyer_id)
-        records = db.query(User).filter_by(id=2).first()
-        print(records.buyer_id)
+    pass

@@ -1,8 +1,30 @@
 from db_user_funcs import (
     create_user, 
-    create_buyer,
     add_friendship
 )
+
+class User:
+    def __init__(
+        self,
+        login: str ,
+        password: str,
+        address: str,
+        name: str,
+        lastname: str,
+        age: int,
+        height: float,
+        weight: float,
+        personality_type: str
+    ):
+        self.login = login
+        self.password = password
+        self.address = address
+        self.name = name
+        self.lastname = lastname
+        self.age = age
+        self.height = height
+        self.weight = weight
+        self.personality_type = personality_type
 
 USERS = [
     ["senks", "1234"],
@@ -17,97 +39,117 @@ USERS = [
     ["popicona", "zvxc"],
 ]
 
-BUYERS = [
-    {
-        "login": "senks",
-        "name": "Арсений",
-        "lastname": "Ильин",
-        "age": 21,
-        "height": 170,
-        "weight": 59,
-        "personality_type": "Сангвиник" 
-    },
-    {
-        "login": "imadji",
-        "name": "Иван",
-        "lastname": "Ежов",
-        "age": 21,
-        "height": 170,
-        "weight": 59,
-        "personality_type": "Холерик" 
-    },
-    {
-        "login": "aemlnt",
-        "name": "Артём",
-        "lastname": "Сидоров",
-        "age": 29,
-        "height": 175,
-        "weight": 65,
-        "personality_type": "Сангвиник" 
-    },
-    {
-        "login": "miro",
-        "name": "Данила",
-        "lastname": "Вошняев",
-        "age": 21,
-        "height": 173,
-        "weight": 65.5,
-        "personality_type": "Сангвиник" 
-    },
-    {
-        "login": "krut",
-        "name": "Петр",
-        "lastname": "Максимов",
-        "age": 25,
-        "height": 180,
-        "weight": 70,
-        "personality_type": "Флегматик"
-    },
-    {
-        "login": "groot",
-        "name": "Полина",
-        "lastname": "Анисимова",
-        "age": 30,
-        "height": 160,
-        "weight": 55,
-        "personality_type": "Меланхолик"
-    },
-    {
-        "login": "kreeper",
-        "name": "Влад",
-        "lastname": "Валунов",
-        "age": 22,
-        "height": 175,
-        "weight": 68,
-        "personality_type": "Холерик"
-    },
-    {
-        "login": "buster",
-        "name": "Станислав",
-        "lastname": "Андреев",
-        "age": 26,
-        "height": 165,
-        "weight": 60,
-        "personality_type": "Сангвиник"
-    },
-    {
-        "login": "zhoos",
-        "name": "Виктория",
-        "lastname": "Романова",
-        "age": 24,
-        "height": 178,
-        "weight": 72,
-        "personality_type": "Холерик"
-    },
-    {
-        "login": "popicona",
-        "name": "Анна",
-        "lastname": "Тронова",
-        "age": 27,
-        "height": 163,
-        "weight": 58,
-        "personality_type": "Меланхолик"
-    }
+USERS = [
+    User(
+        "senks", 
+        "1234",
+        "address",
+        "Арсений",
+        "Ильин",
+        21,
+        170,
+        59,
+        "Сангвиник"
+    ),
+    User(
+        "imadji",
+        "1234",
+        "address",
+        "Иван",
+        "Ежов",
+        21,
+        170,
+        59,
+        "Холерик" 
+    ),
+    User(
+        "aemlnt",
+        "1234",
+        "address",
+        "Артём",
+        "Сидоров",
+        29,
+        175,
+        65,
+        "Сангвиник" 
+    ),
+    User(
+        "miro",
+        "1234",
+        "address",
+        "Данила",
+        "Вошняев",
+        21,
+        173,
+        65.5,
+        "Сангвиник" 
+    ),
+    User(
+        "krut",
+        "1234",
+        "address",
+        "Петр",
+        "Максимов",
+        25,
+        180,
+        70,
+        "Флегматик"
+    ),
+    User(
+        "groot",
+        "1234",
+        "address",
+        "Полина",
+        "Анисимова",
+        30,
+        160,
+        55,
+        "Меланхолик"
+    ),
+    User(
+        "kreeper",
+        "1234",
+        "address",
+        "Влад",
+        "Валунов",
+        22,
+        175,
+        68,
+        "Холерик"
+    ),
+    User(
+        "buster",
+        "1234",
+        "address",
+        "Станислав",
+        "Андреев",
+        26,
+        165,
+        60,
+        "Сангвиник"
+    ),
+    User(
+        "zhoos",
+        "1234",
+        "address",
+        "Виктория",
+        "Романова",
+        24,
+        178,
+        72,
+        "Холерик"
+    ),
+    User(
+        "popicona",
+        "1234",
+        "address",
+        "Анна",
+        "Тронова", 
+        27, 
+        163, 
+        58, 
+        "Меланхолик"
+    )
 ]
 
 FRIENDSHIPS = [
@@ -135,11 +177,11 @@ FRIENDSHIPS = [
 
 # CREATE USERS
 for user in USERS:
-    create_user(user[0], user[1])
+    create_user(user)
 
 # UPLOAD USERS INFO
-for buyer in BUYERS:
-    create_buyer(buyer)
+# for buyer in BUYERS:
+#     create_buyer(buyer)
 
 # ADD FRIENDS
 for friends in FRIENDSHIPS:

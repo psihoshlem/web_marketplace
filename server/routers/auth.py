@@ -11,6 +11,16 @@ class AuthUserSchema(BaseModel):
     login: str 
     password: str
 
+class RegUserSchema(BaseModel):
+    login: str 
+    password: str
+    address: str
+    name: str
+    lastname: str
+    age: int
+    height: float
+    weight: float
+    personality_type: str
 
 router = APIRouter()
 
@@ -22,7 +32,7 @@ async def login(user: AuthUserSchema):
 
 
 @router.post("/signup", tags=["auth"])
-async def signup(user: AuthUserSchema):
-    if not create_user(user.login, user.password):
+async def signup(user: RegUserSchema):
+    if not create_user(user):
         return "Already Exist"
     return encodeJWT(user.login)

@@ -7,15 +7,6 @@ DATABASE_URL = "sqlite:///marketplace.db"
 engine = create_engine(DATABASE_URL)
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    login = Column(String)
-    password = Column(String)
-    buyer_id = Column(Integer, ForeignKey("buyers.id"), nullable=True)
-    buyer = relationship("Buyer", foreign_keys=[buyer_id])
-
 
 class Shop(Base):
     __tablename__ = "shops"
@@ -30,18 +21,19 @@ class Product(Base):
     name = Column(String)
     cost = Column(Float)
 
-class Buyer(Base):
-    __tablename__ = 'buyers'
+class User(Base):
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    login = Column(String)
+    password = Column(String)
+    address = Column(String, nullable=False)
     name = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     age = Column(Integer)
     height = Column(Float)
     weight = Column(Float)
     personality_type = Column(String)
-    user = relationship("User", foreign_keys=[user_id])
 
 class Friendship(Base):
     __tablename__ = 'friendships'
