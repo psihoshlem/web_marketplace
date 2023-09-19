@@ -8,6 +8,8 @@ from functions.db_models import (
     Product,
     Review
 )
+# from db_user_funcs import get_similarity_ratio
+from functions.db_user_funcs import get_similarity_ratio
 
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -26,6 +28,7 @@ def create_product(data: dict):
                 shop_id=shop.id,
                 name=data["product_name"],
                 description=data["description"],
+                rating_all = 0,
                 rating = 0,
                 reviews_count = 0,
                 price=data["price"]
@@ -80,6 +83,24 @@ def get_product(id: int):
         }
     
 
+def create_review(data):
+    with session() as db:
+        db.add(
+            Review(
+                user_id=data["user_id"],
+                product_id=data["product_id"],
+                rating=data["rating"],
+                review=data["review"]
+            )
+        )
+        db.commit()
+        product = db.query(Product).filter_by(id=data["product_id"]).first()
+        product.rating_all += data["rating"]
+        product.reviews_count += 1
+        product.rating = product.rating_all/product.reviews_count
+        db.commit()
+
+
 def get_reviewers(product_id: int):
     reviewers = []
     with session() as db:
@@ -88,7 +109,16 @@ def get_reviewers(product_id: int):
             reviewers.append(review.user.login)
     return reviewers
 
-def get_reviews(product_id: int, user_id: int):
-    pass
+def get_reviews(product_id: int, user_login: str):
+    reviewers_sort = []
+    reviewers = get_reviewers(product_id)
+    for reviewer in reviewers:
+        reviewers_sort.append(
+            {
+                reviewer: get_similarity_ratio(user_login, reviewer)
+            }
+        )
+    print(reviewers_sort)
 
-print(get_reviewers(2))
+
+# get_reviews()

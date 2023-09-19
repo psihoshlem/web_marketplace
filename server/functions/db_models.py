@@ -23,6 +23,7 @@ class Product(Base):
     name = Column(String)
     description = Column(String)
     price = Column(Float)
+    rating_all = Column(Integer)
     reviews_count =  Column(Integer)
     rating = Column(Float)
 
@@ -57,6 +58,7 @@ class Review(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship("User", foreign_keys=[user_id])
+    review = Column(String, nullable=True)
     product_id = Column(Integer, ForeignKey('products.id'))
     product = relationship("Product", foreign_keys=[product_id])
     rating = Column(Integer)

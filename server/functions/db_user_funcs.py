@@ -1,8 +1,8 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import update
 
-# from functions.db_models import User, engine, Friendship
-from db_models import User, engine, Friendship
+from functions.db_models import User, engine, Friendship
+# from db_models import User, engine, Friendship
 
 session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -99,4 +99,5 @@ def get_similarity_ratio(login1: str, login2: str):
     ratio -= abs(user1.height - user2.height)
     ratio -= abs(user1.weight - user2.weight)
     if user1.personality_type == user2.personality_type:
-        pass
+        ratio += 5
+    return ratio
