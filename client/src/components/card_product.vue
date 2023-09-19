@@ -18,13 +18,7 @@
               d="M13.5 0L16.5309 9.32827H26.3393L18.4042 15.0935L21.4351 24.4217L13.5 18.6565L5.5649 24.4217L8.59584 15.0935L0.660737 9.32827H10.4691L13.5 0Z"
               fill="#F2C94C" />
           </svg> {{ item_rating }}</span>
-        <img src="../img/xbox.png" alt="">
-        <div class="category">
-          <span>Xbox</span>
-          <span>Игры</span>
-          <span>Game</span>
-          <span>Консоль</span>
-        </div>
+        <img :src="'http://localhost:8000/getimage/'+item_img" alt="">
         <div class="to-buy">
           <div class="price-btn">
             + 🛒
@@ -95,6 +89,8 @@ export default {
         this.item_name = response.data.name
         this.item_shop = response.data.shop
         this.item_rating = response.data.rating
+        this.item_img = response.data.img
+
       })
   }
 }

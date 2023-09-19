@@ -40,7 +40,7 @@
           </div>
           <div class="basket__box" v-for="item in all_search_list"
             @click="go_to_product(item)">
-            <img src="../img/xyupoimi.png" alt="">
+            <img :src="'http://localhost:8000/getimage/'+item.img" alt="">
             <div class="basket__box-desc">
               <p>
                 {{ item.name }}
