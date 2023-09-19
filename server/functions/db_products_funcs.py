@@ -43,6 +43,7 @@ def get_all_products():
         for product in products:
             products_info.append(
                 {
+                    "id": product.id
                     "name": product.name,
                     "shop": product.shop.name
                 }
