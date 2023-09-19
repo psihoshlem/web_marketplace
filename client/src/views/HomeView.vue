@@ -1,17 +1,240 @@
 <template>
-  <span v-if="status_token === true">\
-    <div>
-      <h3>Добрый день! Вы уже с нами?</h3>
-      <router-link to="/auth">Войдите</router-link> или
-      <router-link to="/reg">Зарегестрируйтесь</router-link>
-    </div>
-    <div>
-      <input placeholder="чего бы хотели найти ебать">
-      <div>
-        <button>одежда</button><button>обувь</button><button>электроника</button>
+  <div class="wrapper">
+    <header>
+      <Header_for_auth v-if="success_auth" />
+      <Header_for_not_auth @auth="show_form_auth()" @reg="show_form_reg()" />
+    </header>
+    <span v-if="show_auth | show_reg == false">
+      <div class="search__block">
+        <input type="text" placeholder="Чтобы вы хотели бы найти?">
+        <div class="search__list">
+          <div class="search__list-item">
+            👕 Одежда
+          </div>
+          <div class="search__list-item">
+            👞 Обувь
+          </div>
+          <div class="search__list-item">
+            💻 Электроника
+          </div>
+          <div class="search__list-item">
+            🛋️ Для дома
+          </div>
+          <div class="search__list-item">
+            📚 Книги
+          </div>
+          <div class="search__list-item">
+            👶🏻 Для детей
+          </div>
+          <div class="search__list-item">
+            🔨Услуги
+          </div>
+        </div>
       </div>
-    </div>
-  </span>
+      <section class="yourBasket">
+        <div class="title">
+          Ваша <span>🛒 </span><a href="">корзина</a>
+        </div>
+        <div class="basket">
+          <div class="basket__box">
+            <img src="../img/xyupoimi.png" alt="">
+            <div class="basket__box-desc">
+              <p>
+                Геймпад проводной для
+                Xbox 360 и ПК, белый
+              </p>
+              <span class="price">
+                14999₽
+              </span>
+            </div>
+          </div>
+          <div class="basket__box">
+            <img src="../img/xyupoimi.png" alt="">
+            <div class="basket__box-desc">
+              <p>
+                Геймпад проводной для
+                Xbox 360 и ПК, белый
+              </p>
+              <span class="price">
+                14999₽
+              </span>
+            </div>
+          </div>
+          <div class="basket__box">
+            <img src="../img/xyupoimi.png" alt="">
+            <div class="basket__box-desc">
+              <p>
+                Геймпад проводной для
+                Xbox 360 и ПК, белый
+              </p>
+              <span class="price">
+                14999₽
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </span>
+    <span>
+      <Authentication v-if="show_auth == true" />
+      <Registration v-if="show_reg == true" />
+    </span>
+    <section class="buyFriend">
+      <div class="title">
+        Посмотрите что уже есть у ваших <span>❤️</span><a href="">друзей </a>
+      </div>
+      <div class="products">
+        <div class="product">
+          <div class="friend">
+            <img src="../img/header_logo.svg" alt="">
+            <span class="name">Арсенчик</span>
+            <div class="recomenduet"> рекомендует для вас:</div>
+          </div>
+          <div class="product-img">
+            <img src="../img/product.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+        <div class="product">
+          <div class="friend">
+            <img src="../img/header_logo.svg" alt="">
+            <span class="name">Арсенчик</span>
+            <div class="recomenduet"> рекомендует для вас:</div>
+          </div>
+          <div class="product-img">
+            <img src="../img/product.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+        <div class="product">
+          <div class="friend">
+            <img src="../img/header_logo.svg" alt="">
+            <span class="name">Арсенчик</span>
+            <div class="recomenduet"> рекомендует для вас:</div>
+          </div>
+          <div class="product-img">
+            <img src="../img/product.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+      </div>
+    </section>
+    <section class="yourLike">
+      <div class="title">
+        Посмотрите что еще вам может понравиться:
+      </div>
+      <div class="products">
+        <div class="product">
+          <div class="product-img">
+            <img src="../img/odelo.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+        <div class="product">
+          <div class="product-img">
+            <img src="../img/odelo.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+        <div class="product">
+          <div class="product-img">
+            <img src="../img/odelo.png" alt="">
+          </div>
+          <div class="product-name">
+            Воображариум УЖАСЫ
+          </div>
+          <span class="product-price">
+            1500₽
+          </span>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="notFound">
+      <div class="title">
+        Это проще чем кажется! Выполните три простых шага!
+      </div>
+      <form action="">
+        <div class="block_name">
+          <label for="name">Название товара:</label>
+          <input id="name" type="text">
+        </div>
+        <div class="block_desc">
+          <label for="desc">Описание товара</label>
+          <textarea id="desc" type="text"></textarea>
+        </div>
+        <div class="block_img">
+          <label for="desc">Фото(при наличии)</label>
+          <input id="desc" type="file">
+        </div>
+        <p>Когда один из наших продавцов откликнется на ваш запрос, вам придет
+          уведомление.</p>
+        <button id="submit">👌🏻 Опубликовать</button>
+      </form>
+    </section>
+
+
+    <footer>
+      <div class="footer__inner">
+        <div class="first_colomn">
+          <a href=""><img src="../img/aple.svg" alt=""></a>
+          <a href=""><img src="../img/qr.svg" alt=""></a>
+        </div>
+        <div class="second_colomn">
+          <div class="first_colomn">
+            <ul>
+              <li><a href="">О нас </a></li>
+              <li><a href="">Наши продавцы</a></li>
+              <li><a href="">О товарах</a></li>
+              <li><a href="">Пресса</a></li>
+            </ul>
+          </div>
+          <div class="second_colomn">
+            <ul>
+              <li><a href="">Помощь </a></li>
+              <li><a href="">Оплата</a></li>
+              <li><a href="">Доставка</a></li>
+              <li><a href="">Возврат</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="third_colomn">
+          <a href=""><img src="../img/inst.svg" alt=""></a>
+          <a href=""><img src="../img/twiter.svg" alt=""></a>
+          <a href=""><img src="../img/facebook.svg" alt=""></a>
+        </div>
+      </div>
+      <div class="foter_logo">
+        <a href="">UMOM Market 2023</a>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -19,283 +242,58 @@ import axios from 'axios';
 
 import Registration from '@/components/Registration.vue'
 import Authentication from '@/components/Authentication.vue'
+import Header_for_auth from '@/components/Header_for_auth.vue'
+import Header_for_not_auth from '@/components/Header_for_not_auth.vue'
 
 export default {
   name: 'HomeView',
   components: {
     Registration,
     Authentication,
+    Header_for_auth,
+    Header_for_not_auth,
   },
   data() {
     return {
       status_token: false,
+      show_reg: false,
+      show_auth: false,
+      success_auth: false
     }
   },
-  async created() {
-    await axios.post('http://127.0.0.1:8000/home', {
-      token: localStorage.getItem('token'),
-    })
-      .then((response) => {
-        if (response.status == 200) {
-          this.$router.push('/main')
-          console.log("token ok")
-        }
-      })
-      .catch((error) => {
-        this.status_token = true
-      });
-  },
+  // async created() {
+  //   await axios.post('http://localhost:8000/auth', {
+  //     token: localStorage.getItem('token'),
+  //   })
+  //     .then((response) => {
+  //       if (response.status == 200) {
+  //         this.$router.push('/main')
+  //         console.log("token ok")
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       this.status_token = true
+  //     });
+  // },
   methods: {
     scrolle_to(anchor) {
       const el = document.getElementById(anchor);
       el.scrollIntoView({ behavior: "smooth", block: "end" })
+    },
+    show_form_auth() {
+      this.show_reg = false
+      this.show_auth = true
+    },
+    show_form_reg() {
+      this.show_auth = false
+      this.show_reg = true
     }
   }
 }
 </script>
 
 <style>
-@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap);
+@import url(../assets/style.css);
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
-.main {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex: 0 0 auto;
-}
-
-.header {
-  min-height: 530px;
-  padding-top: 30px;
-  background-image: url('../img/bg_first_page.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.container {
-  max-width: 1200px;
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
-.menu {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.menu__about {
-  display: flex;
-  justify-content: row;
-}
-
-.about__link {
-  padding: 15px;
-  margin-left: 23px;
-  background: #CEE0E0;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  font-size: 16px;
-  font-family: Roboto;
-}
-
-.menu__log {
-  display: flex;
-  justify-content: row;
-}
-
-.log__link {
-  padding: 15px;
-  margin-right: 35px;
-  background: rgba(217, 217, 217, 0.6);
-  border-radius: 15px;
-  font-size: 16px;
-  font-family: Roboto;
-
-}
-
-.header__content {
-  display: flex;
-  justify-content: space-between;
-}
-
-.content__img {
-  margin-top: 70px;
-  margin-left: 3px;
-}
-
-.content__txt {
-  margin-top: 171px;
-}
-
-.txt__title {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 60px;
-  line-height: 70px;
-  font-size: 60px;
-  text-align: center;
-  color: #fff;
-}
-
-.header__content .txt__desc {
-  margin-left: 90px;
-  width: 400px;
-  font-family: 'Raleway';
-  background: #302F36;
-  border-radius: 15px;
-  color: #a0a0a0;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 35px;
-  text-align: center;
-}
-
-.project {
-  padding-top: 75px;
-  min-height: 500px;
-  background-color: #CFE1E4;
-}
-
-.project__title {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 59px;
-  color: #000000;
-}
-
-.project__txt {
-  margin-top: 50px;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 30px;
-  line-height: 35px;
-  color: #000000;
-}
-
-.project__txt br {
-  margin-top: 30px;
-}
-
-.work {
-  padding-top: 75px;
-  min-height: 500px;
-  background-color: #CFE1E4;
-}
-
-.work__title {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 59px;
-  color: #000000;
-}
-
-.work__desc {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 35px;
-  color: #000000;
-}
-
-.work__txt {
-  margin-top: 30px;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 30px;
-  line-height: 35px;
-}
-
-.about {
-  min-height: 500px;
-  background-color: #CFE1E4;
-}
-
-.about__title {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 59px;
-  color: #000000;
-}
-
-.about__txt {
-  margin-top: 30px;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 30px;
-  line-height: 35px;
-}
-
-footer {
-  min-height: 250px;
-  background: #394042;
-}
-
-footer .container {
-  padding-top: 15px;
-}
-
-.social__title {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 50px;
-}
-
-.social {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  color: #c2bfbf;
-  font-family: 'Roboto';
-}
-
-.social ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  padding: 0;
-}
-
-.social li {
-  margin: 0 20px;
-}
-
-.connect {
-  display: flex;
-  flex-direction: column;
-}
-
-.connect img {
-  width: 59px;
-  height: 48px;
-}
-
-.tru {
-  font-family: 'Roboto';
-  margin-top: 45px;
-  color: #c2bfbf;
-}
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;800&display=swap);
 </style>
