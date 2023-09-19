@@ -1,8 +1,14 @@
-from db_user_funcs import (
+import os
+db_file_path = './marketplace.db'
+if os.path.exists(db_file_path):
+    os.remove(db_file_path)
+
+
+from functions.db_user_funcs import (
     create_user, 
     add_friendship
 )
-from db_products_funcs import (
+from functions.db_products_funcs import (
     create_shop,
     create_product
 )
@@ -167,16 +173,16 @@ FRIENDSHIPS = [
 ]
 
 SHOPS = [
-    "ГаджетГалактика",
-    "УютныйДом",
-    "ДетскийМир",
-    "МодныйШик",
-    "ЗеленыйУголок",
-    "КнижныйМир",
-    "РукодельнаяМастерская",
-    "ЗаботаОПитомцах",
+    "Гаджет Галактика",
+    "Уютный Дом",
+    "Детский Мир",
+    "Забота о здоровье",
+    "ТехноМастер",
+    "Мир искусства",
+    "Маленькая страна",
     "СпортЛидер",
-    "ЗдоровоиКрасиво"
+    "Mr. Cabel",
+    "Очаг"
 ]
 
 PRODUCTS = [

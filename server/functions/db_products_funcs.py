@@ -1,7 +1,6 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import update
 
-# from db_models import (
 from functions.db_models import (
     engine,
     Shop,
