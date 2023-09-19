@@ -140,7 +140,7 @@ export default {
       this.show_reg = false
     },
     go_to_product(item) {
-      this.$router.push({ name: 'product', params: { item_info: item } })
+      this.$router.push({ name: 'product', params: { item_info: item.id } })
     }
   }
 }

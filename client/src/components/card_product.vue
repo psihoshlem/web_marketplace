@@ -71,6 +71,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -79,6 +81,16 @@ export default {
   },
   async mounted() {
     console.log(this.$route.params)
+  },
+  created(){
+    axios.get('http://localhost:8000/get_product?id='+this.$route.params.item_info, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+    .then((response) => {
+      console.log(response.data)
+    })
   }
 }
 </script>
