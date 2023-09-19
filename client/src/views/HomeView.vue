@@ -5,7 +5,7 @@
       <Header_for_not_auth v-else @auth="show_form_auth()"
         @reg="show_form_reg()" />
     </header>
-    <span v-if="show_auth | show_reg == false">
+    <span v-if="show_block == true">
       <div class="search__block">
         <input type="text" placeholder="Чтобы вы хотели бы найти?">
         <div class="search__list">
@@ -77,10 +77,10 @@
       </section>
     </span>
     <span v-else>
-      <Authentication v-if="show_auth == true" />
+      <Authentication v-if="show_auth == true" @succes_auth="go_home()" />
       <Registration v-if="show_reg == true" @succes_reg="go_home()" />
     </span>
-    <section class="buyFriend">
+    <!-- <section class="buyFriend">
       <div class="title">
         Посмотрите что уже есть у ваших <span>❤️</span><a href="">друзей </a>
       </div>
@@ -234,7 +234,7 @@
       <div class="foter_logo">
         <a href="">UMOM Market 2023</a>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
@@ -259,37 +259,40 @@ export default {
       status_token: false,
       show_reg: false,
       show_auth: false,
-      success_auth: false
+      success_auth: false,
+      show_block: true
     }
   },
-  // async created() {
-  //   await axios.post('http://localhost:8000/auth', {
-  //     token: localStorage.getItem('token'),
-  //   })
-  //     .then((response) => {
-  //       if (response.status == 200) {
-  //         this.$router.push('/main')
-  //         console.log("token ok")
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       this.status_token = true
-  //     });
-  // },
+  async created() {
+    await axios.get('http://localhost:8000/get_user_info', {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+      .then((response) => {
+        console.log(response)
+        if (response.status == 200) {
+          this.success_auth == true
+        }
+      })
+  },
   methods: {
     scrolle_to(anchor) {
       const el = document.getElementById(anchor);
       el.scrollIntoView({ behavior: "smooth", block: "end" })
     },
     show_form_auth() {
+      this.show_block = false
       this.show_reg = false
       this.show_auth = true
     },
     show_form_reg() {
+      this.show_block = false
       this.show_auth = false
       this.show_reg = true
     },
     go_home() {
+      this.show_block = true
       this.success_auth = true
       this.show_auth = false
       this.show_reg = false

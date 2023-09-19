@@ -6,13 +6,13 @@
       </div>
       <div class="field">
         <label for="login">Логин</label>
-        <input type="text" id="login">
+        <input type="text" id="login" v-model="login">
       </div>
       <div class="field last" style="margin-top: 17px;">
         <label for="password">Пароль</label>
-        <input type="text" id="password">
+        <input type="text" id="password" v-model="password">
       </div>
-      <div class="btn">Войти</div>
+      <div class="btn" @click="login_auth()">Войти</div>
     </section>
 
   </div>
@@ -27,66 +27,26 @@ export default {
     return {
       login: '',
       password: '',
-      showPassword: "password",
-      error_msg: '',
-      status_token: false
     }
   },
-  async created() {
-    await axios.post('http://localhost:8000/auth', {
-      token: localStorage.getItem('token'),
-    })
-      .then((response) => {
-        if (response.status == 200) {
-          this.$router.push('/main')
-          console.log("token ok")
-        }
-      })
-      .catch((error) => {
-        this.status_token = true
-      });
-  },
   methods: {
-    register() {
-      if (this.validation_value()) {
-        axios.post('http://127.0.0.1:8000/login', {
-          login: this.login,
-          password: this.password
+    login_auth() {
+      axios.post('http://localhost:8000/login', {
+        login: this.login,
+        password: this.password
+      })
+        .then((response) => {
+          if (response.status == 200) {
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('login', this.login)
+            this.$emit('succes_auth', {
+              auth: true
+            })
+          }
         })
-          .then((response) => {
-            if (response.status == 200) {
-              localStorage.setItem('token', response.data.token)
-              localStorage.setItem('login', response.data.login)
-              this.$router.push('/main')
-            }
-          })
-          .catch((error) => {
-            this.error_msg = "Не верный логин или пароль"
-          });
-      }
-    },
-    toggleShow() {
-      this.showPassword = this.showPassword === "password" ? "text" : "password";
-    },
-    go_to_start() {
-      this.$router.push('/')
-    },
-    validation_value() {
-      if (!this.password && !this.login) {
-        this.error_msg = "Укажите пароль и логин"
-        return false
-      }
-      if (!this.login) {
-        this.error_msg = "Укажите логин"
-        return false
-      }
-      if (!this.password) {
-        this.error_msg = "Укажите пароль"
-        return false
-      }
-      if (this.password && this.login) {
-        return true
-      }
+        .catch((error) => {
+          this.error_msg = "Не верный логин или пароль"
+        });
     }
   }
 }
