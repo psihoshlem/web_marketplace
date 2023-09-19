@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <header>
-      <Header_for_auth v-if="test()" />
+      <Header_for_auth v-if="success_auth" />
       <Header_for_not_auth v-else @auth="show_form_auth()"
         @reg="show_form_reg()" />
     </header>
@@ -34,33 +34,9 @@
       </div>
       <section class="yourBasket">
         <div class="title">
-          Ваша <span>🛒 </span><a href="">корзина</a>
+          Успейте купить <span>🛒 </span>
         </div>
         <div class="basket">
-          <div class="basket__box">
-            <img src="../img/xyupoimi.png" alt="">
-            <div class="basket__box-desc">
-              <p>
-                Геймпад проводной для
-                Xbox 360 и ПК, белый
-              </p>
-              <span class="price">
-                14999₽
-              </span>
-            </div>
-          </div>
-          <div class="basket__box">
-            <img src="../img/xyupoimi.png" alt="">
-            <div class="basket__box-desc">
-              <p>
-                Геймпад проводной для
-                Xbox 360 и ПК, белый
-              </p>
-              <span class="price">
-                14999₽
-              </span>
-            </div>
-          </div>
           <div class="basket__box">
             <img src="../img/xyupoimi.png" alt="">
             <div class="basket__box-desc">
@@ -259,12 +235,28 @@ export default {
       status_token: false,
       show_reg: false,
       show_auth: false,
-      show_block: true
+      show_block: true,
+      success_auth: false
     }
   },
+  // async created() {
+  //   if (localStorage.getItem('token') != null) {
+  //     await axios.get('http://localhost:8000/get_user_info', {
+  //       headers: {
+  //         token: localStorage.getItem('token')
+  //       }
+  //     })
+  //       .then((response) => {
+  //         console.log(response)
+  //         if (response.status == 200) {
+  //           console.log("123123")
+  //         }
+  //       })
+  //   }
+  // },
   async mounted() {
     if (localStorage.getItem('token') != null) {
-      await axios.get('http://localhost:8000/get_user_info', {
+      await axios.get('http://localhost:8000/get_all_products', {
         headers: {
           token: localStorage.getItem('token')
         }
@@ -272,7 +264,7 @@ export default {
         .then((response) => {
           console.log(response)
           if (response.status == 200) {
-            this.test()
+            console.log(response.data)
           }
         })
     }
@@ -297,9 +289,6 @@ export default {
       this.success_auth = true
       this.show_auth = false
       this.show_reg = false
-    },
-    test() {
-      return true
     }
   }
 }
