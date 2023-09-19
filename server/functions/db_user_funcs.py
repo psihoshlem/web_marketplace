@@ -90,5 +90,28 @@ def get_user_info_from_db(login: str):
     }
     return info
 
-if __name__=="__main__":
-    pass
+
+def get_similarity_ratio(login1: str, login2: str):
+    ratio = 0
+    user1 = get_user_from_login(login1)
+    user2 = get_user_from_login(login2)
+    ratio -= abs(user1.age - user2.age)
+    ratio -= abs(user1.height - user2.height)
+    ratio -= abs(user1.weight - user2.weight)
+    if user1.personality_type == user2.personality_type:
+        pass
+
+
+def helpa():
+    ids = []
+    ages = []
+    heights = []
+    weights = []
+    S = []
+    H = []
+    M = []
+    F = []
+    with session() as db:
+        users = db.query(User).all()
+        for user in users:
+            pass

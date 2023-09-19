@@ -23,6 +23,8 @@ class Product(Base):
     name = Column(String)
     description = Column(String)
     price = Column(Float)
+    reviews_count =  Column(Integer)
+    rating = Column(Float)
 
 class User(Base):
     __tablename__ = 'users'
@@ -49,5 +51,15 @@ class Friendship(Base):
         self.user_id = user_id
         self.friend_id = friend_id
 
-        
+class Review(Base):
+    __tablename__ = 'reviews'
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship("User", foreign_keys=[user_id])
+    product_id = Column(Integer, ForeignKey('products.id'))
+    product = relationship("Product", foreign_keys=[product_id])
+    rating = Column(Integer)
+
+
 Base.metadata.create_all(bind=engine)
