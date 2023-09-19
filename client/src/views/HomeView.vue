@@ -7,7 +7,8 @@
     </header>
     <span v-if="show_block == true">
       <div class="search__block">
-        <input type="text" placeholder="Чтобы вы хотели бы найти?">
+        <input type="text" placeholder="Чтобы вы хотели бы найти?"
+          v-model="company" @keyup.enter="search()">
         <div class="search__list">
           <div class="search__list-item">
             👕 Одежда
@@ -33,6 +34,26 @@
         </div>
       </div>
       <section class="yourBasket">
+        <span v-if="header_search">
+          <div class="title">
+            Товары по вашему запросу: <span>🛒 </span>
+          </div>
+          <div class="basket__box" v-for="item in all_search_list"
+            @click="go_to_product(item)">
+            <img src="../img/xyupoimi.png" alt="">
+            <div class="basket__box-desc">
+              <p>
+                {{ item.name }}
+              </p>
+              <span class="price">
+                {{ item.shop }}
+              </span>
+              <p class="price">
+                999p.
+              </p>
+            </div>
+          </div>
+        </span>
         <div class="title">
           Успейте купить <span>🛒 </span>
         </div>
@@ -87,7 +108,10 @@ export default {
       show_block: true,
       auth: false,
       success_auth: false,
-      all_products: []
+      all_products: [],
+      company: '',
+      header_search: false,
+      all_search_list: []
     }
   },
   async mounted() {
@@ -137,6 +161,15 @@ export default {
     },
     go_to_product(item) {
       this.$router.push({ name: 'product', params: { item_info: item.id } })
+    },
+    search() {
+      axios.get('http://localhost:8000/search?query=' + this.company)
+        .then((response) => {
+          if (response.status == 200) {
+            this.header_search = true
+            this.all_search_list = response.data
+          }
+        })
     }
   }
 }

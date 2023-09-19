@@ -12,7 +12,13 @@
           {{ item_name }}
           {{ item_shop }}
         </div>
-        <img src="assets/i/xbox.png" alt="">
+        <span style="font-size: 30px;"><svg xmlns="http://www.w3.org/2000/svg"
+            width="27" height="25" viewBox="0 0 27 25" fill="none">
+            <path
+              d="M13.5 0L16.5309 9.32827H26.3393L18.4042 15.0935L21.4351 24.4217L13.5 18.6565L5.5649 24.4217L8.59584 15.0935L0.660737 9.32827H10.4691L13.5 0Z"
+              fill="#F2C94C" />
+          </svg> {{ item_rating }}</span>
+        <img src="../img/xbox.png" alt="">
         <div class="category">
           <span>Xbox</span>
           <span>Игры</span>
@@ -43,11 +49,12 @@
       </div>
       <div class="reviews">
         <div class="title">Отзывы</div>
-        <div class="reviews-block">
+        <div class="reviews-block" v-for="item in item_reviews">
           <div class="reviews-name">
-            <img src="assets/header_logo.svg" alt="">
-            <span>Алексей</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="25"
+            <img src="../img/header_logo.svg" alt="">
+            <span>{{ item.user }}</span>
+            <span class="rating_item">{{ item.rating }}</span> <svg
+              xmlns="http://www.w3.org/2000/svg" width="27" height="25"
               viewBox="0 0 27 25" fill="none">
               <path
                 d="M13.5 0L16.5309 9.32827H26.3393L18.4042 15.0935L21.4351 24.4217L13.5 18.6565L5.5649 24.4217L8.59584 15.0935L0.660737 9.32827H10.4691L13.5 0Z"
@@ -55,7 +62,7 @@
             </svg>
           </div>
           <div class="reviews-text">
-            Неплохо но плейстейшон лучше!
+            {{ item.review }}
           </div>
         </div>
       </div>
@@ -70,7 +77,9 @@ export default {
     return {
       item_name: '',
       item_description: '',
-      item_shop: ''
+      item_shop: '',
+      item_reviews: '',
+      item_rating: ''
     }
   },
   created() {
@@ -80,9 +89,12 @@ export default {
       }
     })
       .then((response) => {
+        this.item_reviews = response.data.reviews
+        console.log(response)
         this.item_description = response.data.description
         this.item_name = response.data.name
         this.item_shop = response.data.shop
+        this.item_rating = response.data.rating
       })
   }
 }

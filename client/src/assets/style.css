@@ -857,6 +857,10 @@ section.product .reviews-block .reviews-name img {
   height: 35px
 }
 
+section.product .reviews-block .reviews-name .rating_item span {
+  margin-left: 5px;
+}
+
 section.product .reviews-block .reviews-name svg {
   margin-left: 6px
 }
