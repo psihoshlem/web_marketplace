@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.get("/get_all_products", tags=["products"])
-async def get_all_products_info(user = Depends(jwt_bearer)):
+async def get_all_products_info():
     return get_all_products()
 
 @router.get("/get_product", tags=["products"])
