@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends
+from fastapi.responses import FileResponse
 
 from functions.jwt_funcs import jwt_bearer
 from functions.db_products_funcs import (
@@ -24,3 +25,8 @@ async def get_one_product(user = Depends(jwt_bearer), id: int = 1):
 @router.get("/search", tags=["products"])
 async def search_product(query):
     return get_products(query)
+
+@router.get("/getimage/{filename}")
+async def get_image(filename: str):
+    image_path = f"./images/{filename}"
+    return FileResponse(image_path, media_type="image/jpeg")

@@ -45,6 +45,7 @@ def get_all_products():
                 {
                     "id": product.id,
                     "name": product.name,
+                    "img": f"pr{product.id}.jpg",
                     "shop": product.shop.name
                 }
             )
@@ -63,6 +64,7 @@ def get_products(query: str):
                 {
                     "id": product.id,
                     "name": product.name,
+                    "img": f"pr{product.id}.jpg",
                     "description": product.description,
                     "rating": product.rating,
                     "shop": product.shop.name
@@ -79,6 +81,7 @@ def get_product(id: int, login: str):
             "name": product.name,
             "description": product.description,
             "rating": product.rating,
+            "img": f"pr{product.id}.jpg",
             "shop": product.shop.name,
             "reviews": get_reviews(id, login)
         }
