@@ -9,7 +9,7 @@
         Добрый день
         <img src="../img/header_logo.svg" alt=""
           style="height: 48px; width: 48px;">
-        <span>Артем!</span>
+        <span>{{ get_login() }}</span>
       </div>
       <p class="content__left-bottom">
         Сегодня дождливо. У вас уже есть<span>☂️</span><a href="">
@@ -24,3 +24,17 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      login: ''
+    }
+  },
+  methods: {
+    get_login() {
+      return localStorage.getItem('login')
+    },
+  }
+}
+</script>

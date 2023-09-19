@@ -2,7 +2,8 @@
   <div class="wrapper">
     <header>
       <Header_for_auth v-if="success_auth" />
-      <Header_for_not_auth @auth="show_form_auth()" @reg="show_form_reg()" />
+      <Header_for_not_auth v-else @auth="show_form_auth()"
+        @reg="show_form_reg()" />
     </header>
     <span v-if="show_auth | show_reg == false">
       <div class="search__block">
@@ -75,9 +76,9 @@
         </div>
       </section>
     </span>
-    <span>
+    <span v-else>
       <Authentication v-if="show_auth == true" />
-      <Registration v-if="show_reg == true" />
+      <Registration v-if="show_reg == true" @succes_reg="go_home()" />
     </span>
     <section class="buyFriend">
       <div class="title">
@@ -287,6 +288,11 @@ export default {
     show_form_reg() {
       this.show_auth = false
       this.show_reg = true
+    },
+    go_home() {
+      this.success_auth = true
+      this.show_auth = false
+      this.show_reg = false
     }
   }
 }
