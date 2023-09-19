@@ -117,20 +117,26 @@ export default {
         weight: this.weight,
         personality_type: this.personality_type
       })
-        .then((response) => {
-          if (response.status == 200) {
-            console.log(response)
-            localStorage.clear()
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('login', this.login)
+      .then((response) => {
+        if (response.status == 200) {
+          console.log(response)
+          localStorage.setItem('token', response.data.token)
+          axios.get('http://localhost:8000/get_user_info', {
+            headers: {
+              token: response.data.token
+            } 
+          })
+          .then((response) => {
+            localStorage.setItem('name', response.data.name)
             this.$emit('succes_reg', {
-              reg: true
-            })
-          }
-        })
-        .catch((error) => {
-          this.error_msg = "Что-то пошло не так"
-        });
+                auth: true
+              })
+          })
+        }
+      })
+      .catch((error) => {
+        this.error_msg = "Что-то пошло не так"
+      });
     },
     toggleShow() {
       this.showPassword = this.showPassword === "password" ? "text" : "password";

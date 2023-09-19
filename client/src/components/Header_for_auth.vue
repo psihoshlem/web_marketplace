@@ -9,7 +9,7 @@
         Добрый день
         <img src="../img/header_logo.svg" alt=""
           style="height: 48px; width: 48px;">
-        <span>{{ get_login() }}</span>
+        <span>{{ name }}</span>
       </div>
       <p class="content__left-bottom">
         Сегодня дождливо. У вас уже есть<span>☂️</span><a href="">
@@ -28,12 +28,17 @@
 export default {
   data() {
     return {
-      login: ''
+      name: "111"
     }
+  },
+  created(){
+    console.log("header for auth")
+    console.log(localStorage.getItem('name'))
+    this.name = localStorage.getItem('name')
   },
   methods: {
     get_login() {
-      return localStorage.getItem('login')
+      return localStorage.getItem('name')
     },
   }
 }

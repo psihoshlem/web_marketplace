@@ -31,23 +31,34 @@ export default {
   },
   methods: {
     login_auth() {
+      let token;
       axios.post('http://localhost:8000/login', {
         login: this.login,
         password: this.password
       })
         .then((response) => {
           if (response.status == 200) {
-            localStorage.clear()
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('login', this.login)
-            this.$emit('succes_auth', {
-              auth: true
-            })
+            if (response.data.token != undefined){
+              localStorage.setItem('token', response.data.token)
+            }
           }
+          else return
+          axios.get('http://localhost:8000/get_user_info', {
+            headers: {
+              token: response.data.token
+            } 
+          })
+          .then((response) => {
+            localStorage.setItem('name', response.data.name)
+            this.$emit('succes_auth', {
+                auth: true
+              })
+          })
         })
         .catch((error) => {
           this.error_msg = "Не верный логин или пароль"
         });
+        
     }
   }
 }
