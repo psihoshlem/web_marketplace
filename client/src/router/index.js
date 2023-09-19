@@ -27,7 +27,7 @@ const routes = [
     component: Profile
   },
   {
-    path: "/product",
+    path: "/product:item_info",
     name: "product",
     component: card_product
   }

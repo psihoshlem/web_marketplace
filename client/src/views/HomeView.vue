@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <header>
-      <!-- <Header_for_auth v-if="success_auth" /> -->
       <Header_for_auth v-if="auth" />
       <Header_for_not_auth v-else @auth="show_form_auth()"
         @reg="show_form_reg()" />
@@ -91,7 +90,7 @@ export default {
       all_products: []
     }
   },
-  async created() {
+  async mounted() {
     if (localStorage.getItem('token') != null) {
       await axios.get('http://localhost:8000/get_all_products', {
         headers: {
@@ -105,11 +104,19 @@ export default {
         })
     }
   },
+  async created() {
+    await axios.get('http://localhost:8000/get_all_products', {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          this.all_products = response.data
+        }
+      })
+  },
   methods: {
-    scrolle_to(anchor) {
-      const el = document.getElementById(anchor);
-      el.scrollIntoView({ behavior: "smooth", block: "end" })
-    },
     show_form_auth() {
       this.show_block = false
       this.show_reg = false
@@ -128,7 +135,7 @@ export default {
       this.show_reg = false
     },
     go_to_product(item) {
-      this.$router.push({ name: 'product', params: { item_info: item } })
+      this.$router.push({ name: 'product', params: { item_info: item.id } })
     }
   }
 }
