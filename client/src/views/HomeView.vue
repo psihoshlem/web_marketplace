@@ -105,6 +105,21 @@ export default {
         })
     }
   },
+  async mounted() {
+    if (localStorage.getItem('token') != null) {
+      await axios.get('http://localhost:8000/get_all_products', {
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then((response) => {
+          console.log(response)
+          if (response.status == 200) {
+            this.all_products = response.data
+          }
+        })
+    }
+  },
   methods: {
     scrolle_to(anchor) {
       const el = document.getElementById(anchor);
