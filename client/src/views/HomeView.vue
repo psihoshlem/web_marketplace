@@ -40,7 +40,7 @@
           </div>
           <div class="basket__box" v-for="item in all_search_list"
             @click="go_to_product(item)">
-            <img :src="'http://localhost:8000/getimage/'+item.img" alt="">
+            <img :src="'http://localhost:8000/getimage/' + item.img" alt="">
             <div class="basket__box-desc">
               <p>
                 {{ item.name }}
@@ -57,20 +57,22 @@
         <div class="title">
           Успейте купить <span>🛒 </span>
         </div>
-        <div class="basket">
-          <div class="basket__box" v-for="item in all_products"
+        <div class="cards">
+          <div class="card" v-for="item in all_products"
             @click="go_to_product(item)">
-            <img :src="'http://localhost:8000/getimage/'+item.img" alt="">
-            <div class="basket__box-desc">
-              <p>
+            <div class="card__top">
+              <a href="#" class="card__image">
+                <img :src="'http://localhost:8000/getimage/' + item.img"
+                  alt="Apple IPhone 14 PRO Max Gold" />
+              </a>
+            </div>
+            <div class="card__bottom">
+              <div class="card__prices">
+                <div class="card__price card__price--common">150 000</div>
+              </div>
+              <a href="#" class="card__title">
                 {{ item.name }}
-              </p>
-              <span class="price">
-                {{ item.shop }}
-              </span>
-              <p class="price">
-                999p.
-              </p>
+              </a>
             </div>
           </div>
         </div>
