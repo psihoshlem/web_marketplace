@@ -91,7 +91,7 @@ export default {
       all_products: []
     }
   },
-  async created() {
+  async mounted() {
     if (localStorage.getItem('token') != null) {
       await axios.get('http://localhost:8000/get_all_products', {
         headers: {
@@ -105,20 +105,17 @@ export default {
         })
     }
   },
-  async mounted() {
-    if (localStorage.getItem('token') != null) {
-      await axios.get('http://localhost:8000/get_all_products', {
-        headers: {
-          token: localStorage.getItem('token')
+  async created() {
+    await axios.get('http://localhost:8000/get_all_products', {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          this.all_products = response.data
         }
       })
-        .then((response) => {
-          console.log(response)
-          if (response.status == 200) {
-            this.all_products = response.data
-          }
-        })
-    }
   },
   methods: {
     scrolle_to(anchor) {
