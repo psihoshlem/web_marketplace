@@ -37,16 +37,19 @@
           Успейте купить <span>🛒 </span>
         </div>
         <div class="basket">
-          <div class="basket__box">
+          <div class="basket__box" v-for="item in all_products"
+            @click="go_to_product(item)">
             <img src="../img/xyupoimi.png" alt="">
             <div class="basket__box-desc">
               <p>
-                Геймпад проводной для
-                Xbox 360 и ПК, белый
+                {{ item.name }}
               </p>
               <span class="price">
-                14999₽
+                {{ item.shop }}
               </span>
+              <p class="price">
+                999p.
+              </p>
             </div>
           </div>
         </div>
@@ -236,7 +239,8 @@ export default {
       show_reg: false,
       show_auth: false,
       show_block: true,
-      success_auth: false
+      success_auth: false,
+      all_products: []
     }
   },
   // async created() {
@@ -254,7 +258,7 @@ export default {
   //       })
   //   }
   // },
-  async mounted() {
+  async created() {
     if (localStorage.getItem('token') != null) {
       await axios.get('http://localhost:8000/get_all_products', {
         headers: {
@@ -264,7 +268,7 @@ export default {
         .then((response) => {
           console.log(response)
           if (response.status == 200) {
-            console.log(response.data)
+            this.all_products = response.data
           }
         })
     }
@@ -289,6 +293,9 @@ export default {
       this.success_auth = true
       this.show_auth = false
       this.show_reg = false
+    },
+    go_to_product(item) {
+      this.$router.push({ name: 'product', params: { item_info: item } })
     }
   }
 }

@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Registration from '../components/Registration.vue'
 import Authentication from '../components/Authentication.vue'
 import Profile from '../components/Profile.vue'
+import card_product from '../components/card_product.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: Profile
+  },
+  {
+    path: "/product",
+    name: "product",
+    component: card_product
   }
 ]
 
