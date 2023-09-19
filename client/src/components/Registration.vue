@@ -120,6 +120,7 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             console.log(response)
+            localStorage.clear()
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('login', this.login)
             this.$emit('succes_reg', {

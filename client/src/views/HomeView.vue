@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <header>
-      <Header_for_auth v-if="success_auth" />
+      <Header_for_auth v-if="test()" />
       <Header_for_not_auth v-else @auth="show_form_auth()"
         @reg="show_form_reg()" />
     </header>
@@ -259,22 +259,23 @@ export default {
       status_token: false,
       show_reg: false,
       show_auth: false,
-      success_auth: false,
       show_block: true
     }
   },
-  async created() {
-    await axios.get('http://localhost:8000/get_user_info', {
-      headers: {
-        token: localStorage.getItem('token')
-      }
-    })
-      .then((response) => {
-        console.log(response)
-        if (response.status == 200) {
-          this.success_auth == true
+  async mounted() {
+    if (localStorage.getItem('token') != null) {
+      await axios.get('http://localhost:8000/get_user_info', {
+        headers: {
+          token: localStorage.getItem('token')
         }
       })
+        .then((response) => {
+          console.log(response)
+          if (response.status == 200) {
+            this.test()
+          }
+        })
+    }
   },
   methods: {
     scrolle_to(anchor) {
@@ -296,6 +297,9 @@ export default {
       this.success_auth = true
       this.show_auth = false
       this.show_reg = false
+    },
+    test() {
+      return true
     }
   }
 }
