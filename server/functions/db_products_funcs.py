@@ -1,5 +1,5 @@
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import update
+from sqlalchemy import and_
 
 # from db_models import (
 from functions.db_models import (
@@ -71,7 +71,7 @@ def get_products(query: str):
     return products_info
 
 
-def get_product(id: int):
+def get_product(id: int, login: str):
     with session() as db:
         product = db.query(Product).filter(Product.id==id).first()
         return {
@@ -80,7 +80,7 @@ def get_product(id: int):
             "description": product.description,
             "rating": product.rating,
             "shop": product.shop.name,
-            "reviews": []
+            "reviews": get_reviews(id, login)
         }
     
 
@@ -110,18 +110,28 @@ def get_reviewers(product_id: int):
             reviewers.append(review.user.id)
     return reviewers
 
-def get_reviews(product_id: int, user_id: id):
+def get_reviews(product_id: int, user_login):
     reviews = []
     reviewers_sort = []
     reviewers = get_reviewers(product_id)
     for reviewer in reviewers:
         reviewers_sort.append(
             {
-                reviewer: get_similarity_ratio(user_id, reviewer)
+                reviewer: get_similarity_ratio(user_login, reviewer)
             }
         )
     sorted_data = sorted(reviewers_sort, key=lambda x: list(x.values())[0], reverse=True)
     user_ids = [list(d.keys())[0] for d in sorted_data]
     for user_id in user_ids:
         with session() as db:
-            pass
+            review = db.query(Review).filter(and_(Review.user_id == user_id, Review.product_id == product_id)).first()
+            reviews.append(
+                {
+                    "user": review.user.name,
+                    "rating": review.rating,
+                    "review": review.review
+                }
+            )
+    return reviews
+
+# print(get_reviews(20, 9))

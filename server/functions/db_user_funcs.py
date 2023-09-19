@@ -91,9 +91,9 @@ def get_user_info_from_db(login: str):
     return info
 
 
-def get_similarity_ratio(id1: str, id2: str):
+def get_similarity_ratio(user_login: str, id2: str):
     ratio = 0
-    user1 = get_user_from_id(id1)
+    user1 = get_user_from_login(user_login)
     user2 = get_user_from_id(id2)
     ratio -= abs(user1.age - user2.age)
     ratio -= abs(user1.height - user2.height)
