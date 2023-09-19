@@ -370,186 +370,60 @@ PRODUCTS = [
 ]
 
 REVIEWS = [
-    {
-        "user_id": 7,
-        "product_id": 14,
-        "rating": 4,
-        "review": "Отличный продукт, рекомендую!"
-    },
-    {
-        "user_id": 2,
-        "product_id": 28,
-        "rating": 5,
-        "review": "Просто супер, не ожидал такого качества!"
-    },
-    {
-        "user_id": 9,
-        "product_id": 5,
-        "rating": 2,
-        "review": "Не понравилось, слишком дорого для качества."
-    },
-    {
-        "user_id": 6,
-        "product_id": 12,
-        "rating": 3,
-        "review": "Средний продукт, ничего особенного."
-    },
-    {
-        "user_id": 8,
-        "product_id": 7,
-        "rating": 4,
-        "review": "Хороший выбор, цена соответствует качеству."
-    },
-    {
-        "user_id": 5,
-        "product_id": 22,
-        "rating": 1,
-        "review": "Ужасно! Никому не советую."
-    },
-    {
-        "user_id": 1,
-        "product_id": 16,
-        "rating": 5,
-        "review": "Лучший продукт, который я когда-либо покупал!"
-    },
-    {
-        "user_id": 3,
-        "product_id": 29,
-        "rating": 3,
-        "review": "Сойдет, но есть лучше."
-    },
-    {
-        "user_id": 4,
-        "product_id": 9,
-        "rating": 4,
-        "review": "Неплохой выбор, устраивает."
-    },
-    {
-        "user_id": 10,
-        "product_id": 3,
-        "rating": 2,
-        "review": "Не очень доволен, ожидал большего."
-    },
-    {
-        "user_id": 2,
-        "product_id": 11,
-        "rating": 4,
-        "review": "Понравилось, но есть небольшие недостатки."
-    },
-    {
-        "user_id": 5,
-        "product_id": 20,
-        "rating": 3,
-        "review": "Средний продукт, ожидал большего."
-    },
-    {
-        "user_id": 8,
-        "product_id": 15,
-        "rating": 5,
-        "review": "Отличное качество, достойная покупка."
-    },
-    {
-        "user_id": 1,
-        "product_id": 2,
-        "rating": 2,
-        "review": "Не рекомендую, есть лучше."
-    },
-    {
-        "user_id": 4,
-        "product_id": 25,
-        "rating": 4,
-        "review": "Хороший товар за свои деньги."
-    },
-    {
-        "user_id": 6,
-        "product_id": 13,
-        "rating": 1,
-        "review": "Полный отстой, не стоит даже рассматривать."
-    },
-    {
-        "user_id": 10,
-        "product_id": 18,
-        "rating": 5,
-        "review": "Идеальное соотношение цены и качества."
-    },
-    {
-        "user_id": 3,
-        "product_id": 8,
-        "rating": 3,
-        "review": "Средний товар, ничего особенного."
-    },
-    {
-        "user_id": 7,
-        "product_id": 30,
-        "rating": 4,
-        "review": "Неплохой выбор для повседневного использования."
-    },
-    {
-        "user_id": 9,
-        "product_id": 17,
-        "rating": 1,
-        "review": "Ужасное качество, не рекомендую никому."
-    },
-    {
-        "user_id": 7,
-        "product_id": 19,
-        "rating": 3,
-        "review": "Среднее качество за средние деньги."
-    },
-    {
-        "user_id": 2,
-        "product_id": 27,
-        "rating": 5,
-        "review": "Отличный продукт, несмотря на цену."
-    },
-    {
-        "user_id": 8,
-        "product_id": 4,
-        "rating": 2,
-        "review": "Не оправдал ожидания, много проблем."
-    },
-    {
-        "user_id": 6,
-        "product_id": 21,
-        "rating": 4,
-        "review": "Хорошее соотношение цены и качества."
-    },
-    {
-        "user_id": 5,
-        "product_id": 10,
-        "rating": 1,
-        "review": "Ужасное качество, никому не рекомендую."
-    },
-    {
-        "user_id": 9,
-        "product_id": 26,
-        "rating": 4,
-        "review": "Неплохой выбор для повседневного использования."
-    },
-    {
-        "user_id": 1,
-        "product_id": 23,
-        "rating": 3,
-        "review": "Сойдет, если не искать совершенства."
-    },
-    {
-        "user_id": 3,
-        "product_id": 24,
-        "rating": 5,
-        "review": "Лучший вариант на рынке, очень доволен."
-    },
-    {
-        "user_id": 4,
-        "product_id": 29,
-        "rating": 2,
-        "review": "Не стоит своих денег, разочарован."
-    },
-    {
-        "user_id": 10,
-        "product_id": 16,
-        "rating": 4,
-        "review": "Хороший товар, но есть недостатки."
-    }
+    {"user_id": 1, "product_id": 15, "rating": 4, "review": "Отличный товар!"},
+    {"user_id": 2, "product_id": 5, "rating": 2, "review": "Не понравилось."},
+    {"user_id": 3, "product_id": 12, "rating": 5, "review": "Замечательно!"},
+    {"user_id": 4, "product_id": 8, "rating": 3, "review": "Средний товар."},
+    {"user_id": 5, "product_id": 27, "rating": 4, "review": "Хороший выбор."},
+    {"user_id": 6, "product_id": 19, "rating": 1, "review": "Ужасное качество."},
+    {"user_id": 7, "product_id": 7, "rating": 4, "review": "Мне понравилось."},
+    {"user_id": 8, "product_id": 14, "rating": 5, "review": "Прекрасный товар!"},
+    {"user_id": 9, "product_id": 23, "rating": 3, "review": "Так себе..."},
+    {"user_id": 10, "product_id": 1, "rating": 2, "review": "Не рекомендую."},
+    {"user_id": 1, "product_id": 20, "rating": 4, "review": "Хороший выбор."},
+    {"user_id": 2, "product_id": 9, "rating": 3, "review": "Средний товар."},
+    {"user_id": 3, "product_id": 6, "rating": 5, "review": "Отличный продукт!"},
+    {"user_id": 4, "product_id": 25, "rating": 2, "review": "Не впечатлил."},
+    {"user_id": 5, "product_id": 16, "rating": 1, "review": "Ужасно..."},
+    {"user_id": 6, "product_id": 10, "rating": 4, "review": "Хорошее качество."},
+    {"user_id": 7, "product_id": 30, "rating": 3, "review": "Средний выбор."},
+    {"user_id": 8, "product_id": 11, "rating": 5, "review": "Отличный товар!"},
+    {"user_id": 9, "product_id": 3, "rating": 2, "review": "Не понравилось."},
+    {"user_id": 10, "product_id": 18, "rating": 1, "review": "Ужасное качество."},
+    {"user_id": 1, "product_id": 2, "rating": 4, "review": "Мне понравилось."},
+    {"user_id": 2, "product_id": 4, "rating": 5, "review": "Замечательный товар!"},
+    {"user_id": 3, "product_id": 28, "rating": 3, "review": "Средний продукт."},
+    {"user_id": 4, "product_id": 13, "rating": 2, "review": "Не впечатлил."},
+    {"user_id": 5, "product_id": 21, "rating": 1, "review": "Ужасно..."},
+    {"user_id": 6, "product_id": 17, "rating": 4, "review": "Хорошее качество."},
+    {"user_id": 7, "product_id": 22, "rating": 3, "review": "Средний выбор."},
+    {"user_id": 8, "product_id": 29, "rating": 5, "review": "Отличный товар!"},
+    {"user_id": 9, "product_id": 26, "rating": 2, "review": "Не понравилось."},
+    {"user_id": 10, "product_id": 24, "rating": 1, "review": "Ужасное качество."},
+    {"user_id": 1, "product_id": 7, "rating": 4, "review": "Мне понравилось."},
+    {"user_id": 2, "product_id": 16, "rating": 5, "review": "Замечательный товар!"},
+    {"user_id": 3, "product_id": 9, "rating": 3, "review": "Средний продукт."},
+    {"user_id": 4, "product_id": 14, "rating": 2, "review": "Не впечатлил."},
+    {"user_id": 5, "product_id": 8, "rating": 1, "review": "Ужасно..."},
+    {"user_id": 6, "product_id": 25, "rating": 4, "review": "Хорошее качество."},
+    {"user_id": 7, "product_id": 11, "rating": 3, "review": "Средний выбор."},
+    {"user_id": 8, "product_id": 23, "rating": 5, "review": "Отличный товар!"},
+    {"user_id": 9, "product_id": 6, "rating": 2, "review": "Не понравилось."},
+    {"user_id": 10, "product_id": 12, "rating": 1, "review": "Ужасное качество."},
+    {"user_id": 1, "product_id": 3, "rating": 4, "review": "Мне понравилось."},
+    {"user_id": 2, "product_id": 28, "rating": 5, "review": "Замечательный товар!"},
+    {"user_id": 3, "product_id": 13, "rating": 3, "review": "Средний продукт."},
+    {"user_id": 4, "product_id": 21, "rating": 2, "review": "Не впечатлил."},
+    {"user_id": 5, "product_id": 10, "rating": 1, "review": "Ужасно..."},
+    {"user_id": 6, "product_id": 18, "rating": 4, "review": "Хорошее качество."},
+    {"user_id": 7, "product_id": 29, "rating": 3, "review": "Средний выбор."},
+    {"user_id": 8, "product_id": 4, "rating": 5, "review": "Отличный товар!"},
+    {"user_id": 9, "product_id": 17, "rating": 2, "review": "Не понравилось."},
+    {"user_id": 10, "product_id": 26, "rating": 1, "review": "Ужасное качество."},
+    {"user_id": 2, "product_id": 20, "rating": 5, "review": "Замечательное качество."},
+    {"user_id": 3, "product_id": 20, "rating": 3, "review": "Средний конструктор."},
+    {"user_id": 4, "product_id": 20, "rating": 4, "review": "Мне понравилось."},
+    {"user_id": 5, "product_id": 20, "rating": 5, "review": "Прекрасный выбор!"},
 ]
 
 # CREATE USERS

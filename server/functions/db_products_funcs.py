@@ -106,19 +106,21 @@ def get_reviewers(product_id: int):
     with session() as db:
         reviews = db.query(Review).filter(Review.product_id==product_id).all()
         for review in reviews:
-            reviewers.append(review.user.login)
+            reviewers.append(review.user.id)
     return reviewers
 
-def get_reviews(product_id: int, user_login: str):
+def get_reviews(product_id: int, user_id: id):
+    reviews = []
     reviewers_sort = []
     reviewers = get_reviewers(product_id)
     for reviewer in reviewers:
         reviewers_sort.append(
             {
-                reviewer: get_similarity_ratio(user_login, reviewer)
+                reviewer: get_similarity_ratio(user_id, reviewer)
             }
         )
-    print(reviewers_sort)
-
-
-# get_reviews()
+    sorted_data = sorted(reviewers_sort, key=lambda x: list(x.values())[0], reverse=True)
+    user_ids = [list(d.keys())[0] for d in sorted_data]
+    for user_id in user_ids:
+        with session() as db:
+            pass
