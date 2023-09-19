@@ -11,7 +11,7 @@ def encodeJWT(login: str):
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
     return {
-        "access token": token
+        "token": token
     }
 
 
