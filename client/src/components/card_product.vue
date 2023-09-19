@@ -9,7 +9,8 @@
       </div>
       <div class="product-block">
         <div class="product-title">
-          Игровая консоль<strong> Xbox One Microsoft 500Gb</strong>
+          {{ item_name }}
+          {{ item_shop }}
         </div>
         <img src="assets/i/xbox.png" alt="">
         <div class="category">
@@ -30,16 +31,7 @@
       </div>
       <div class="desc-block">
         <div class="title">Описание</div>
-        <p>Игровая приставка Microsoft Xbox Series X — устройство с впечатляющей
-          конфигурацией, сочетающейся с лаконичным внешним видом.
-          Высочайший уровень производительности этой модели позволяет получить
-          картинку идеального качества при любой детализации графики
-          МОЩНЕЙШЕЕ ЖЕЛЕЗОЭто самый крупный скачок в плане процессоров из всех
-          поколений Xbox. Консоль в четыре раза мощнее своих
-          предшественников благодаря процессору AMD Zen 2, 16 ГБ оперативной
-          памяти, а также специально созданному графическому процессору
-          AMD Navi. Один чип XSX может воспроизводить сразу четыре игровые сессии
-          Xbox One S..</p>
+        <p>{{ item_description }}</p>
       </div>
       <div class="feature">
         <div class="title">Характеристики:</div>
@@ -76,21 +68,22 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      login: ''
+      item_name: '',
+      item_description: '',
+      item_shop: ''
     }
   },
-  async mounted() {
-    console.log(this.$route.params)
-  },
-  created(){
-    axios.get('http://localhost:8000/get_product?id='+this.$route.params.item_info, {
+  created() {
+    axios.get('http://localhost:8000/get_product?id=' + this.$route.params.item_info, {
       headers: {
         token: localStorage.getItem('token')
       }
     })
-    .then((response) => {
-      console.log(response.data)
-    })
+      .then((response) => {
+        this.item_description = response.data.description
+        this.item_name = response.data.name
+        this.item_shop = response.data.shop
+      })
   }
 }
 </script>

@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <header>
-      <!-- <Header_for_auth v-if="success_auth" /> -->
       <Header_for_auth v-if="auth" />
       <Header_for_not_auth v-else @auth="show_form_auth()"
         @reg="show_form_reg()" />
@@ -118,10 +117,6 @@ export default {
       })
   },
   methods: {
-    scrolle_to(anchor) {
-      const el = document.getElementById(anchor);
-      el.scrollIntoView({ behavior: "smooth", block: "end" })
-    },
     show_form_auth() {
       this.show_block = false
       this.show_reg = false
