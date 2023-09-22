@@ -212,23 +212,23 @@ export default {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             });
     },
     methods: {
         check() {
             this.checkForm()
-            console.log(
-                "token:", localStorage.getItem('token'),
-                "\nlogin:", localStorage.getItem('login'),
-                "\nstatus:", this.status,
-                "\njob_title:", this.check_value_speciality(),
-                "\nstack:", this.value_stack,
-                "\nexperience:", this.value_experience,
-                "\ndescription:", this.description,
-                "\ntelegram:", this.telegram,
-                "\ndiscord:", this.discord
-            )
+            // console.log(
+            //     "token:", localStorage.getItem('token'),
+            //     "\nlogin:", localStorage.getItem('login'),
+            //     "\nstatus:", this.status,
+            //     "\njob_title:", this.check_value_speciality(),
+            //     "\nstack:", this.value_stack,
+            //     "\nexperience:", this.value_experience,
+            //     "\ndescription:", this.description,
+            //     "\ntelegram:", this.telegram,
+            //     "\ndiscord:", this.discord
+            // )
         },
         post() {
             axios.post('http://127.0.0.1:8000/profile', {
@@ -244,15 +244,15 @@ export default {
             })
                 .then((response) => {
                     if (response.status == 200) {
-                        console.log("ok")
+                        // console.log("ok")
                     }
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
         },
         output_console_value(value) {
-            console.log(value)
+            // console.log(value)
         },
         checkForm() {
             if (this.description && this.value_speciality && this.value_stack && this.value_experience && this.telegram && this.discord) {
@@ -306,7 +306,7 @@ export default {
                     }
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 })
         }
     }

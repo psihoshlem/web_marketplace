@@ -119,7 +119,7 @@ export default {
       })
       .then((response) => {
         if (response.status == 200) {
-          console.log(response)
+          // console.log(response)
           localStorage.setItem('token', response.data.token)
           axios.get('http://localhost:8000/get_user_info', {
             headers: {

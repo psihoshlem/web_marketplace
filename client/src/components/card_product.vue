@@ -22,7 +22,7 @@
         <div class="to-buy">
           <div class="price-btn">
             + 🛒
-            <span class="price">55999₽</span>
+            <span class="price">{{ item_price }} ₽</span>
           </div>
           <div class="to-buy_btn">
             Добавить в корзину
@@ -32,14 +32,6 @@
       <div class="desc-block">
         <div class="title">Описание</div>
         <p>{{ item_description }}</p>
-      </div>
-      <div class="feature">
-        <div class="title">Характеристики:</div>
-        <ul class="feature-list">
-          <li>Объем встроенной памяти</li>
-          <li>Графический процессор</li>
-          <li>Процессор</li>
-        </ul>
       </div>
       <div class="reviews">
         <div class="title">Отзывы</div>
@@ -84,13 +76,13 @@ export default {
     })
       .then((response) => {
         this.item_reviews = response.data.reviews
-        console.log(response)
+        // console.log(response)
         this.item_description = response.data.description
         this.item_name = response.data.name
         this.item_shop = response.data.shop
         this.item_rating = response.data.rating
         this.item_img = response.data.img
-
+        this.item_price = response.data.price
       })
   }
 }

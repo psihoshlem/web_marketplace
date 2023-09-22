@@ -68,7 +68,7 @@
             </div>
             <div class="card__bottom">
               <div class="card__prices">
-                <div class="card__price card__price--common">150 000</div>
+                <div class="card__price card__price--common">{{ item.price }}</div>
               </div>
               <a href="#" class="card__title">
                 {{ item.name }}
@@ -138,7 +138,7 @@ export default {
     })
       .then((response) => {
         if (response.status == 200) {
-          console.log(response.data)
+          // console.log(response.data)
           this.all_products = response.data
         }
       })

@@ -32,8 +32,8 @@ export default {
     }
   },
   created(){
-    console.log("header for auth")
-    console.log(localStorage.getItem('name'))
+    // console.log("header for auth")
+    // console.log(localStorage.getItem('name'))
     this.name = localStorage.getItem('name')
   },
   methods: {
